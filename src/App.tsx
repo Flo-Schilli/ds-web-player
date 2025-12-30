@@ -19,6 +19,7 @@ export const App = () => {
             return
         } else {
             const deviceId = searchParams.get('deviceId')
+            const deviceName = searchParams.get('deviceName')
             const uuid = searchParams.get('uuid')
             const backend = searchParams.get('backend')
 
@@ -27,7 +28,7 @@ export const App = () => {
 
                 if (backend) newConfig.cmsAdapter = backend
                 if (uuid) newConfig.deviceUuid = uuid
-                if (deviceId) newConfig.deviceName = deviceId
+                if (deviceId) newConfig.deviceName = deviceName || deviceId
 
                 updateConfig(newConfig).then(() => {
                     navigate(window.location.pathname, { replace: true })
