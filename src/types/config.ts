@@ -3,6 +3,8 @@ export interface ConfigData {
     cmsAdapterUrl: string
     timezone: string
     playbackTrackerEnabled: boolean
+    deviceUuid?: string
+    deviceName?: string
 }
 
 export interface ConfigStorageAdapter {
