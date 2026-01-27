@@ -22,6 +22,41 @@ Built with **Vite**, **React**, and **TypeScript**.
 	npm run dev
 	```
 
+## Docker (Production Build)
+
+Build the image:
+```bash
+docker build -t ds-web-player .
+```
+
+Run the container:
+```bash
+docker run --rm -p 8080:80 ds-web-player
+```
+
+Open `http://localhost:8080`.
+
+### Docker on Another PC
+
+Option 1: Build from source
+```bash
+git clone https://github.com/screenlite/web-player.git
+cd web-player
+docker build -t ds-web-player .
+docker run --rm -p 8080:80 ds-web-player
+```
+
+Option 2: Build once and transfer the image
+```bash
+# On the source PC
+docker build -t ds-web-player .
+docker save -o ds-web-player.tar ds-web-player
+
+# On the other PC
+docker load -i ds-web-player.tar
+docker run --rm -p 8080:80 ds-web-player
+```
+
 ## Supported Data Sources
 
 - **Network JSON file**
