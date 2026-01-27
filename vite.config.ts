@@ -8,4 +8,13 @@ export default defineConfig({
         react(),
         tailwindcss()
     ],
+    build: {
+        sourcemap: true,
+    },
+    css: {
+        devSourcemap: true
+    },
+    server: {
+        port: 5173,
+    },
 })

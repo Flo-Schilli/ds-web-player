@@ -1,17 +1,22 @@
 import type { CMSAdapter } from '../types'
 import { smilToScreenliteJson } from '../utils/smilJsonToScreenliteJson'
+import type {ConfigData} from '../types/config.ts'
 
 export class GarlicHubAdapter implements CMSAdapter {
     private cmsUrl: string
     private pollingInterval: number
+    private readonly deviceName: string
+    private readonly deviceUuid: string
     private intervalId: NodeJS.Timeout | null = null
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private callback: ((state: any) => void) | null = null
     private etag: string | null = null
     private lastModified: string | null = null
 
-    constructor(cmsUrl: string, pollingInterval: number = 10000) {
-        this.cmsUrl = new URL(cmsUrl).origin
+    constructor(config: ConfigData, pollingInterval: number = 10000) {
+        this.cmsUrl = new URL(config.cmsAdapterUrl).origin
+        this.deviceName = config.deviceName || 'Screenlite'
+        this.deviceUuid = config.deviceUuid || '15920d5d-7e68-4a61-a145-15b58b6d2090'
         this.pollingInterval = pollingInterval
     }
 
@@ -23,8 +28,9 @@ export class GarlicHubAdapter implements CMSAdapter {
         } else if (this.lastModified) {
             headers['If-Modified-Since'] = this.lastModified
         }
-		
-        headers['X-Signage-Agent'] = 'GAPI/1.0 (UUID:15920d5d-7e68-4a61-a145-15b58b6d2090; NAME:Screenlite Web Test) screenlite-web/0.0.1 (MODEL:ScreenliteWeb)'
+
+        // For now, it is important to keep the MODEL as ScreenliteWeb as otherwise the backend tells us it's an unsupported device
+        headers['X-Signage-Agent'] = `GAPI/1.0 (UUID:${ this.deviceUuid }; NAME:${ this.deviceName }) screenlite-web/0.0.1 (MODEL:ScreenliteWeb)`
 
         const endpoint = `${this.cmsUrl}/smil-index`
 
