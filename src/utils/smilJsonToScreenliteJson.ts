@@ -73,7 +73,7 @@ export function smilToScreenliteJson(smilXml: string, cmsUrl: string): Playlist[
     const playlist: Playlist = {
         id: generateUniqueId(basePlaylistId, usedIds),
         start_date: '2025-01-01',
-        end_date: '2025-12-31',
+        end_date: '2026-12-31',
         start_time: '00:00:00',
         end_time: '23:59:59',
         width,

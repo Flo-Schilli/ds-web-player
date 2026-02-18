@@ -1,6 +1,6 @@
 export const DEFAULT_CONFIG = {
-    cmsAdapter: 'NetworkFile',
-    cmsAdapterUrl: '',
+    cmsAdapter: 'GarlicHub',
+    cmsAdapterUrl: 'http://localhost:8090',
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     playbackTrackerEnabled: false
 } as const
