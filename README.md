@@ -22,6 +22,17 @@ Built with **Vite**, **React**, and **TypeScript**.
 	npm run dev
 	```
 
+## Docker Compose (Development Build)
+Build the image:
+```bash
+docker compose build --no-cache --pull
+```
+
+Run compose:
+```bash
+docker compose up --force-recreate
+```
+
 ## Docker (Production Build)
 
 Build the image:
